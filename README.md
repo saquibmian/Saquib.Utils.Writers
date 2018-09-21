@@ -6,7 +6,7 @@ Various object writers for .NET.
 Here is a sample usage:
 
 ```csharp
-var header = ImmutableHashSet.Create<string>( "id", "some_other_id", "name" );
+var header = ImmutableArray.Create<string>( "id", "some_other_id", "name" );
 var data = new[] {
     new[] { "1", "2", "first" },
     new[] { "2", "2", "second" },
