@@ -1,0 +1,27 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+clone_depth: 1
+init:
+  - cmd: git config --global core.autocrlf true
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore --verbosity m
+build_script:
+  - cmd: dotnet pack -p:PackageVersion=%APPVEYOR_BUILD_VERSION% ./Saquib.Utils.Writers/Saquib.Utils.Writers.csproj -c Release --include-source --include-symbols
+test_script:
+  - cmd: dotnet test ./Saquib.Utils.Writers.Tests/Saquib.Utils.Writers.Tests.csproj
+artifacts:
+ - path: '**\*.nupkg'
+   name: nuget packages
+   type: NuGetPackage
+deploy:
+  provider: NuGet
+  on:
+    branch: master
+  api_key:
+    secure: vg0d3t3PR6ry+wZ6KcZKmNO1/5iE/W50QcsphboHFXfKZQxi0BWi8IxfLMs3F93b
+  skip_symbols: false
+  artifact: nuget packages
