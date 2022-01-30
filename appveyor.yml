@@ -22,6 +22,6 @@ deploy:
   on:
     branch: master
   api_key:
-    secure: vg0d3t3PR6ry+wZ6KcZKmNO1/5iE/W50QcsphboHFXfKZQxi0BWi8IxfLMs3F93b
+    secure: KI7IOyuUwFBgjO/ht34fMYgL92dCASN+T3tPUZj3p8BJKrTVRP91jX0OsDPRliMm
   skip_symbols: false
   artifact: nuget packages
