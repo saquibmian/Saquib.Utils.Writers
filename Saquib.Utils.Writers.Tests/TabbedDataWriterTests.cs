@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Saquib.Utils.Writers.Tests {
+namespace Saquib.Utils.Writers {
     public class TabbedDataWriterTests {
         [Fact]
         public async Task WriteBatchAsync__WritesCorrectly() {
