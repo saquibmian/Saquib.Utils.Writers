@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
@@ -16,12 +17,15 @@ namespace Saquib.Utils.Writers {
                 new(null, +1.1, +1.1),
                 new("", 0, 0),
             };
-            var expected = @"SomeString | SomeDouble | SomeCurrency
-======================================
-str1       | -1.1       | -$1.10      
-           | 1.1        | $1.10       
-           | 0          | $0.00       
-";
+            var padLength = "======================================".Length;
+            var expected = string.Join( Environment.NewLine, new[] {
+                "SomeString | SomeDouble | SomeCurrency",
+                "======================================",
+                $"str1       | -1.1       | {-1.1:c}".PadRight(padLength),
+                $"           | 1.1        | {1.1:c}".PadRight(padLength),
+                $"           | 0          | {0:c}".PadRight(padLength),
+                ""
+            } );
 
             var written = await WriteData( data );
 
@@ -30,7 +34,6 @@ str1       | -1.1       | -$1.10
 
         private static async Task<string> WriteData( IEnumerable<TestObject> data ) {
             using var writer = new StringWriter();
-            writer.NewLine = "\r\n";
 
             var tdw = new TabbedObjectWriter<TestObject>(
                 writer,
