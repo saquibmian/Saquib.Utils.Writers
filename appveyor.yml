@@ -10,7 +10,7 @@ before_build:
   - cmd: dotnet --version
   - cmd: dotnet restore --verbosity m
 build_script:
-  - cmd: dotnet pack -p:PackageVersion=%APPVEYOR_BUILD_VERSION% ./Saquib.Utils.Writers/Saquib.Utils.Writers.csproj -c Release --include-source --include-symbols
+  - cmd: dotnet pack -p:PackageVersion=%APPVEYOR_BUILD_VERSION% ./Saquib.Utils.Writers/Saquib.Utils.Writers.csproj -c Release
 test_script:
   - cmd: dotnet test ./Saquib.Utils.Writers.Tests/Saquib.Utils.Writers.Tests.csproj
 artifacts:
@@ -23,5 +23,4 @@ deploy:
     branch: master
   api_key:
     secure: KI7IOyuUwFBgjO/ht34fMYgL92dCASN+T3tPUZj3p8BJKrTVRP91jX0OsDPRliMm
-  skip_symbols: false
   artifact: nuget packages
